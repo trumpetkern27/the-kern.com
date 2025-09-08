@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "the-kern.com/1.0.0": {
+        "runtime": {
+          "the-kern.com.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "the-kern.com/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
