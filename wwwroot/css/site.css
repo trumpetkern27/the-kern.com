@@ -19,6 +19,12 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: #ffbf7b;
+  /* Grainy effect using SVG data URI */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' fill='none'><filter id='noiseFilter'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23noiseFilter)'/></svg>");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  /* Optional: adjust opacity with a pseudo-element for more control */
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
