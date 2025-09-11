@@ -6,7 +6,7 @@
     const ctx = canvas.getContext('2d');
 
     // Settings
-    let cellSize = 8;
+    let cellSize = 2;
     let cols, rows, grid, next;
 
     function resize() {
@@ -63,6 +63,17 @@
         // Swap grids
         [grid, next] = [next, grid];
     }
+
+    // Add click event to toggle cell state
+    canvas.addEventListener('click', function(e) {
+        const rect = canvas.getBoundingClientRect();
+        const x = Math.floor((e.clientX - rect.left) / cellSize);
+        const y = Math.floor((e.clientY - rect.top) / cellSize);
+        if (x >= 0 && x < cols && y >= 0 && y < rows) {
+            grid[y][x] = grid[y][x] ? 0 : 1;
+            draw(); // Optional: update immediately
+        }
+    });
 
     function animate() {
         step();
