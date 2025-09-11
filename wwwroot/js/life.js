@@ -79,16 +79,6 @@
         toggleCellAt(x, y);
     });
 
-    // Touch support for mobile
-    canvas.addEventListener('touchstart', function(e) {
-        if (e.touches.length > 0) {
-            const rect = canvas.getBoundingClientRect();
-            const touch = e.touches[0];
-            const x = Math.floor((touch.clientX - rect.left) / cellSize);
-            const y = Math.floor((touch.clientY - rect.top) / cellSize);
-            toggleCellAt(x, y);
-        }
-    });
 
     function animate() {
         step();
