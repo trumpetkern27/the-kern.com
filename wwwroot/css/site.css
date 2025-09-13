@@ -74,7 +74,6 @@ body {
   border: 2px solid #ff0000;
   margin: 10px 0;
   font-family:'Times New Roman', Times, serif;
-  box-shadow: 2px 2px 5px rgba(218, 75, 19, 0.3);
 }
 
 .accordion-header {
@@ -95,7 +94,7 @@ body {
 
 
 .accordion-body {
-  padding: 10px;
+  padding: 0;
   background: linear-gradient(170deg, #66a3ff, #0047b3, #66a3ff);
   animation: gradientShift 10s ease infinite;
   border-top: 2px solid #000080;
@@ -105,8 +104,15 @@ body {
   transition: 0.3s ease;
 }
 
+@keyframes gradientShift {
+  0% {background-position: 0% 50%; }
+  50% {backgournd-position: 100% 50%; }
+  100% {background-position: 0% 50%; }
+}
+
 .accordion-header.active + .accordion-body {
   max-height: 500px;
+  padding: 10px;
 }
 .accordion-body a {
   display: block;
@@ -128,7 +134,7 @@ body {
 }
 
 .header-bar .page-title {
-  font-family: "fraktur", serif;
+  font-family: "UnifrakturCook", cursive, serif;
   font-size: 2.5rem;
   color: #00BFFF;
   margin: 0;
@@ -140,6 +146,6 @@ body {
   position: absolute;
   left: 1rem;
   font-size: 1.2rem;
-  text-decoration: none;
-  color: inherit;
+  text-decoration: underline;
+  color: #00bfffb9;
 }
