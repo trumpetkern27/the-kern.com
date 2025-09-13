@@ -68,6 +68,8 @@ body {
 }
 
 .accordion {
+  position: relative;
+  z-index: 20;
   width: 300px;
   border: 2px solid #ff0000;
   margin: 10px 0;
