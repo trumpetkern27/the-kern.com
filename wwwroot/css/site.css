@@ -95,25 +95,34 @@ body {
 
 
 .accordion-body {
-  padding: 0;
-  background: linear-gradient(170deg, #66a3ff, #0047b3, #66a3ff);
-  animation: gradientShift 10s ease infinite;
-  border-top: 2px solid #000080;
-  font-size: 13px;
   max-height: 0;
   overflow: hidden;
-  transition: 0.1s ease;
+  padding: 0;
+  border-top: 2px solid #000080;
+  font-size: 13px;
+
+  /* animated gradient setup */
+  background: linear-gradient(270deg, #66a3ff 0%, #0047b3 50%, #66a3ff 100%);
+  background-size: 600% 100%;      /* <-- important: make it larger than element */
+  background-repeat: no-repeat;
+  background-position: 0% 50%;
+
+  /* transition for open/close */
+  transition: max-height 0.35s ease, padding 0.35s ease;
 }
 
-@keyframes gradientShift {
-  0% {background-position: 0% 50%; }
-  50% {background-position: 100% 50%; }
-  100% {background-position: 0% 50%; }
-}
-
+/* when opened: restore padding and start the animation */
 .accordion-header.active + .accordion-body {
-  max-height: 500px;
+  max-height: 500px;       /* big enough for your content */
   padding: 10px;
+  animation: gradientShift 8s linear infinite; /* animate only when open */
+}
+
+/* moving background */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 .accordion-body a {
   display: block;
