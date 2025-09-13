@@ -96,12 +96,13 @@ body {
 
 .accordion-body {
   padding: 10px;
-  background: #fdfdfd;
+  background: linear-gradient(170deg, #66a3ff, #0047b3, #66a3ff);
+  animation: gradientShift 10s ease infinite;
   border-top: 2px solid #000080;
   font-size: 13px;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .accordion-header.active + .accordion-body {
@@ -116,4 +117,29 @@ body {
 
 .accordion-body a:hover {
   color: #ff0000;
+}
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 1rem;
+}
+
+.header-bar .page-title {
+  font-family: "fraktur", serif;
+  font-size: 2.5rem;
+  color: #00BFFF;
+  margin: 0;
+  text-align: center;
+  flex: 1;
+}
+
+.header-bar .home-link {
+  position: absolute;
+  left: 1rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: inherit;
 }
