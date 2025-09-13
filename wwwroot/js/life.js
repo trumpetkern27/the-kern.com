@@ -1,5 +1,6 @@
 /* game of life code*/
 
+
 (function() {
     const canvas = document.getElementById('conwayGoL');
     if (!canvas) return;
@@ -10,11 +11,23 @@
     let cols, rows, grid, next;
     let isDrawing = false;
 
+    // Helper to get the actual display size of the canvas
+    function getDisplaySize() {
+        // Use CSS pixel size for canvas
+        const rect = canvas.getBoundingClientRect();
+        return { width: rect.width, height: rect.height };
+    }
+
     function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        cols = Math.floor(canvas.width / cellSize);
-        rows = Math.floor(canvas.height / cellSize);
+        // Set canvas size to match CSS size (devicePixelRatio for sharpness)
+        const dpr = window.devicePixelRatio || 1;
+        const { width, height } = getDisplaySize();
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
+        ctx.scale(dpr, dpr);
+        cols = Math.floor(width / cellSize);
+        rows = Math.floor(height / cellSize);
         grid = Array.from({length: rows}, () => Array(cols).fill(0));
         next = Array.from({length: rows}, () => Array(cols).fill(0));
         randomize();
@@ -63,61 +76,62 @@
         [grid, next] = [next, grid];
     }
 
+
     function handleDraw(e) {
         const rect = canvas.getBoundingClientRect();
-        const x = (Math.floor((e.clientX - rect.left) / cellSize) + cols) % cols;
-        const y = (Math.floor((e.clientY - rect.top) / cellSize) + rows) % rows;
-        grid[y][x] = grid[y][x] ? 0 : 1;
-        draw();
+        let clientX = e.clientX;
+        let clientY = e.clientY;
+        if (e.touches && e.touches.length > 0) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+        }
+        const x = (Math.floor((clientX - rect.left) / cellSize) + cols) % cols;
+        const y = (Math.floor((clientY - rect.top) / cellSize) + rows) % rows;
+        if (x >= 0 && x < cols && y >= 0 && y < rows) {
+            grid[y][x] = grid[y][x] ? 0 : 1;
+            draw();
+        }
     }
 
-    function handleDrawMobile(e) {
-        const rect = canvas.getBoundingClientRect();
-        const touch = e.touches[0];
-        const x = (Math.floor((touch.clientX - rect.left) / cellSize) + cols) % cols;
-        const y = (Math.floor((touch.clientY - rect.top) / cellSize) + rows) % rows;
-        grid[y][x] = grid[y][x] ? 0 : 1;
-        draw();
-    }
 
 
-    // Add click event to toggle cell state
+    // Add click/touch event to toggle cell state
     canvas.addEventListener('touchstart', function(e) {
         e.preventDefault();
         isDrawing = true;
-        handleDrawMobile(e);
-    }, { passive: false })
+        handleDraw(e);
+    }, { passive: false });
     canvas.addEventListener('mousedown', function(e) {
         isDrawing = true;
         handleDraw(e);
-    })
+    });
     canvas.addEventListener('touchmove', function(e) {
         e.preventDefault();
-        if (isDrawing) handleDrawMobile(e);
-    }, {passive: false })
+        if (isDrawing) handleDraw(e);
+    }, { passive: false });
     canvas.addEventListener('mousemove', function(e) {
         if (isDrawing) handleDraw(e);
-    })
+    });
     canvas.addEventListener('touchend', function(e) {
         e.preventDefault();
         isDrawing = false;
-    }, { passive: false })
+    }, { passive: false });
     canvas.addEventListener('mouseup', function() {
         isDrawing = false;
-    })
+    });
     canvas.addEventListener('touchcancel', function(e) {
         e.preventDefault();
         isDrawing = false;
-    }, { passive: false })
+    }, { passive: false });
     canvas.addEventListener('mouseleave', function() {
         isDrawing = false;
-    })
+    });
     window.addEventListener('mouseup', function() {
         isDrawing = false;
-    })
+    });
     window.addEventListener('mouseleave', function() {
         isDrawing = false;
-    })
+    });
 
     /*canvas.addEventListener('click', function(e) {
         const rect = canvas.getBoundingClientRect();
@@ -137,7 +151,16 @@
     }
 
     window.addEventListener('resize', resize);
-    resize();
-    animate();
+    window.addEventListener('orientationchange', resize);
+    // Wait for DOM to be fully loaded before sizing
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            resize();
+            animate();
+        });
+    } else {
+        resize();
+        animate();
+    }
 })();
 
