@@ -46,9 +46,9 @@
                 for (let dy = -1; dy <= 1; dy++) {
                     for (let dx = -1; dx <= 1; dx++) {
                         if (dx === 0 && dy === 0) continue;
-                        let ny = (y + dy) % rows;
-                        let nx = (x + dx) % rows;
-                        neighbors += grid[ny % rows][nx % cols];
+                        let ny = (y + dy + rows) % rows;
+                        let nx = (x + dx + cols) % cols;
+                        neighbors += grid[ny][nx];
                     }
                 }
                 if (grid[y][x]) {
