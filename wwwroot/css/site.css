@@ -39,7 +39,8 @@ html {
 }
 
 .textur h1 {
-  font-size: 3rem;
+  font-size: 4rem;
+  -webkit-text-stroke: 2px rgba(0, 191, 255, 0.7);
 }
 
 .textur h2 {
@@ -48,7 +49,7 @@ html {
 
 body {
   margin-bottom: 60px;
-  background-color: rgba(0, 0, 0, .7);
+  background-color: rgba(0, 0, 0, 1);
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -154,8 +155,9 @@ body {
 
 .header-bar .page-title {
   font-family: 'Textur', serif;
-  font-size: 2.5rem;
+  font-size: 4rem;
   color: #da800b;
+  -webkit-text-stroke: 2px rgba(0, 191, 255, 0.7);
   margin: 0;
   text-align: center;
   flex: 1;
