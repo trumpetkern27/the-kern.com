@@ -8,6 +8,7 @@
     // Settings
     let cellSize = 2;
     let cols, rows, grid, next;
+    let isDrawing = false;
 
     function resize() {
         canvas.width = window.innerWidth;
@@ -62,10 +63,31 @@
         [grid, next] = [next, grid];
     }
 
+    function handleDraw(e) {
+        const rect = canvas.getBoundingClientRect();
+        const x = (Math.floor((e.clientX - rect.left) / cellSize) + cols) % cols;
+        const y = (Math.floor((e.clientY - rect.top) / cellSize) + rows) % rows;
+        grid[y][x] = grid[y][x] ? 0 : 1;
+        draw();
+    }
+
+
     // Add click event to toggle cell state
 
-
-    canvas.addEventListener('click', function(e) {
+    canvas.addEventListener('mousedown', function(e) {
+        isDrawing = true;
+        handleDraw(e)
+    })
+    canvas.addEventListener('mousemove', function(e) {
+        if (isDrawing) handleDraw(e);
+    })
+    canvas.addEventListener('mouseup', function() {
+        isDrawing = false;
+    })
+    canvas.addEventListener('mouseleave', function() {
+        isDrawing = false;
+    })
+    /*canvas.addEventListener('click', function(e) {
         const rect = canvas.getBoundingClientRect();
         const x = Math.floor((e.clientX - rect.left) / cellSize);
         const y = Math.floor((e.clientY - rect.top) / cellSize);
@@ -73,13 +95,15 @@
             grid[y][x] = grid[y][x] ? 0 : 1;
             draw();
         }
-    });
+    });*/
 
 
     function animate() {
-        step();
-        draw();
-        requestAnimationFrame(animate);
+        if (! isDrawing) {
+            step();
+            draw();
+            requestAnimationFrame(animate);
+        }
     }
 
     window.addEventListener('resize', resize);
