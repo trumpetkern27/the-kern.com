@@ -164,3 +164,7 @@ body {
 .directory a:hover {
   text-decoration: unerline;
 }
+
+.big-title {
+  font-size: 4rem;
+}
