@@ -1,7 +1,0 @@
-C:\Users\Zach\Documents\personal\projects\code\website\the-kern.com\bin\Release\net9.0\publish\the-kern.com.exe
-C:\Users\Zach\Documents\personal\projects\code\website\the-kern.com\bin\Release\net9.0\publish\appsettings.Development.json
-C:\Users\Zach\Documents\personal\projects\code\website\the-kern.com\bin\Release\net9.0\publish\appsettings.json
-C:\Users\Zach\Documents\personal\projects\code\website\the-kern.com\bin\Release\net9.0\publish\the-kern.com.dll
-C:\Users\Zach\Documents\personal\projects\code\website\the-kern.com\bin\Release\net9.0\publish\the-kern.com.deps.json
-C:\Users\Zach\Documents\personal\projects\code\website\the-kern.com\bin\Release\net9.0\publish\the-kern.com.runtimeconfig.json
-C:\Users\Zach\Documents\personal\projects\code\website\the-kern.com\bin\Release\net9.0\publish\the-kern.com.pdb
