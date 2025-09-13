@@ -91,14 +91,21 @@ body {
   background: linear-gradient(to bottom, #e0e0e0, #a0a0a0)
 }
 
+
 .accordion-body {
   display: none;
   padding: 10px;
   background: #fdfdfd;
   border-top: 2px solid #000080;
   font-size: 13px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3 ease;
 }
 
+.accordion-header.active + .accordion-body {
+  max-height: 500px;
+}
 .accordion-body a {
   display: block;
   margin: 4px 0;
