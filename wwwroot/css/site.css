@@ -26,16 +26,29 @@ html {
 }
 
 @font-face {
-  font-family: 'XITS Math';
-  src: url('/fonts/xits-math.woff') format('woff');
+  font-family: 'Textur';
+  src: url('/fonts/textur.TTF') format('truetype');
 }
 
 .fraktur {
   font-family: 'UnifrakturMaguntia', cursive, serif;
 }
+
+.textur {
+  font-family: 'Textur', serif;
+}
+
+.textur h1 {
+  font-size: 3rem;
+}
+
+.textur h2 {
+  font-size: 2rem;
+}
+
 body {
   margin-bottom: 60px;
-  background-color: #000000;
+  background-color: rgba(0, 0, 0, .7);
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -61,6 +74,10 @@ body {
 
 .turqoise-blue {
   color: #00BFFF
+}
+
+.fun-orange {
+  color: #da800b;
 }
 
 .links {
@@ -136,9 +153,9 @@ body {
 }
 
 .header-bar .page-title {
-  font-family: 'UnifrakturMaguntia', cursive, serif;
+  font-family: 'Textur', serif;
   font-size: 2.5rem;
-  color: #00BFFF;
+  color: #da800b;
   margin: 0;
   text-align: center;
   flex: 1;
