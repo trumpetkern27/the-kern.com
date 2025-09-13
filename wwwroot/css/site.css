@@ -101,12 +101,12 @@ body {
   font-size: 13px;
   max-height: 0;
   overflow: hidden;
-  transition: 0.3s ease;
+  transition: 0.1s ease;
 }
 
 @keyframes gradientShift {
   0% {background-position: 0% 50%; }
-  50% {backgournd-position: 100% 50%; }
+  50% {background-position: 100% 50%; }
   100% {background-position: 0% 50%; }
 }
 
