@@ -95,14 +95,13 @@ body {
 
 
 .accordion-body {
-  display: none;
   padding: 10px;
   background: #fdfdfd;
   border-top: 2px solid #000080;
   font-size: 13px;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3 ease;
+  transition: max-height 0.3s ease;
 }
 
 .accordion-header.active + .accordion-body {
