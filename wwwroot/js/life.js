@@ -71,22 +71,50 @@
         draw();
     }
 
+    function handleDrawMobile(e) {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        const x = (Math.floor((touch.clientX - rect.left) / cellSize) + cols) % cols;
+        const y = (Math.floor((touch.clientY - rect.top) / cellSize) + rows) % rows;
+        grid[y][x] = grid[y][x] ? 0 : 1;
+        draw();
+    }
+
 
     // Add click event to toggle cell state
-
+    canvas.addEventListener('touchstart', function(e) {
+        isDrawing = true;
+        handleDrawMobile(e);
+    })
     canvas.addEventListener('mousedown', function(e) {
         isDrawing = true;
-        handleDraw(e)
+        handleDraw(e);
+    })
+    canvas.addEventListener('touchmove', function(e) {
+        if (isDrawing) handleDrawMobile(e);
     })
     canvas.addEventListener('mousemove', function(e) {
         if (isDrawing) handleDraw(e);
     })
+    canvas.addEventListener('touchend', function() {
+        isDrawing = false;
+    })
     canvas.addEventListener('mouseup', function() {
+        isDrawing = false;
+    })
+    canvas.addEventListener('touchcancel', function() {
         isDrawing = false;
     })
     canvas.addEventListener('mouseleave', function() {
         isDrawing = false;
     })
+    window.addEventListener('mouseup', function() {
+        isDrawing = false;
+    })
+    window.addEventListener('mouseleave', function() {
+        isDrawing = false;
+    })
+
     /*canvas.addEventListener('click', function(e) {
         const rect = canvas.getBoundingClientRect();
         const x = Math.floor((e.clientX - rect.left) / cellSize);
@@ -99,11 +127,9 @@
 
 
     function animate() {
-        if (! isDrawing) {
-            step();
-            draw();
-            requestAnimationFrame(animate);
-        }
+        step();
+        draw();
+        requestAnimationFrame(animate);
     }
 
     window.addEventListener('resize', resize);
