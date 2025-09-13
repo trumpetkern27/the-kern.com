@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("the-kern.com")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5fc89a5d38b7dd92a84167f2eea052a87274785")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25e8e37d38573ef097a7751c25b13dd038d022b8")]
 [assembly: System.Reflection.AssemblyProductAttribute("the-kern.com")]
 [assembly: System.Reflection.AssemblyTitleAttribute("the-kern.com")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

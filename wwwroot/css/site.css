@@ -27,7 +27,7 @@ html {
 
 @font-face {
   font-family: 'XITS Math';
-  src: url('/fonts/xits-math.woff2') format('woff2');
+  src: url('/fonts/xits-math.woff') format('woff');
 }
 
 .fraktur {
