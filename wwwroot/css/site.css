@@ -24,9 +24,13 @@ html {
   z-index: -1;
   display: block
 }
+
+.fraktur {
+  font-family: 'UnifrakturCook', cursive, sans-serif;
+}
 body {
   margin-bottom: 60px;
-  background-color: #ffbf7b;
+  background-color: #ffffff;
   /* PNG noise texture for maximum compatibility
   background-image: url('/images/texture.png');
   background-repeat: repeat;
@@ -40,4 +44,20 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+.royal-blue {
+  color: #4169E1;
+}
+
+.dodger-blue {
+  color: #1E90FF;
+}
+
+.sky-blue {
+  color: #3399FF;
+}
+
+.turqoise-blue {
+  color: #00BFFF
 }
