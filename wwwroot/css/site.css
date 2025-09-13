@@ -61,3 +61,51 @@ body {
 .turqoise-blue {
   color: #00BFFF
 }
+
+.links {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.accordion {
+  width: 300px;
+  border: 2px solid #ff0000;
+  margin: 10px 0;
+  font-family:'Times New Roman', Times, serif;
+  box-shadow: 2px 2px 5px rgba(218, 75, 19, 0.3);
+}
+
+.accordion-header {
+  background: radial-gradient(circle at center, #66a3ff, #0047b3);
+  color: black;
+  font-weight: bold;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.accordion-header:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #a0a0a0)
+}
+
+.accordion-body {
+  display: none;
+  padding: 10px;
+  background: #fdfdfd;
+  border-top: 2px solid #000080;
+  font-size: 13px;
+}
+
+.accordion-body a {
+  display: block;
+  margin: 4px 0;
+  color: #0000cc;
+  text-decoration: underline;
+}
+
+.accordion-body a:hover {
+  color: #ff0000;
+}
