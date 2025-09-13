@@ -86,7 +86,7 @@
         e.preventDefault();
         isDrawing = true;
         handleDrawMobile(e);
-    }, { passive: false})
+    }, { passive: false })
     canvas.addEventListener('mousedown', function(e) {
         isDrawing = true;
         handleDraw(e);
@@ -94,21 +94,21 @@
     canvas.addEventListener('touchmove', function(e) {
         e.preventDefault();
         if (isDrawing) handleDrawMobile(e);
-    }, {passive: false})
+    }, {passive: false })
     canvas.addEventListener('mousemove', function(e) {
         if (isDrawing) handleDraw(e);
     })
-    canvas.addEventListener('touchend', function() {
+    canvas.addEventListener('touchend', function(e) {
         e.preventDefault();
         isDrawing = false;
-    }, { passive: false})
+    }, { passive: false })
     canvas.addEventListener('mouseup', function() {
         isDrawing = false;
     })
-    canvas.addEventListener('touchcancel', function() {
+    canvas.addEventListener('touchcancel', function(e) {
         e.preventDefault();
         isDrawing = false;
-    }, { passive: false})
+    }, { passive: false })
     canvas.addEventListener('mouseleave', function() {
         isDrawing = false;
     })
