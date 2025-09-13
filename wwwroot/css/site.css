@@ -153,6 +153,13 @@ body {
 
 .directory {
   text-align: center;
+}
+
+.directory a {
   color: #ff9100;
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+.directory a:hover {
+  text-decoration: unerline;
 }
