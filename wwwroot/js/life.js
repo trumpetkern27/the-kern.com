@@ -49,7 +49,7 @@
                         let ny = y + dy;
                         let nx = x + dx;
                         if (ny >= 0 && ny < rows && nx >= 0 && nx < cols) {
-                            neighbors += grid[ny][nx];
+                            neighbors += grid[ny % rows][nx % cols];
                         }
                     }
                 }
