@@ -30,7 +30,7 @@ html {
 }
 body {
   margin-bottom: 60px;
-  background-color: #ffffff;
+  background-color: #000000;
   /* PNG noise texture for maximum compatibility
   background-image: url('/images/texture.png');
   background-repeat: repeat;
