@@ -46,11 +46,9 @@
                 for (let dy = -1; dy <= 1; dy++) {
                     for (let dx = -1; dx <= 1; dx++) {
                         if (dx === 0 && dy === 0) continue;
-                        let ny = y + dy;
-                        let nx = x + dx;
-                        if (ny >= 0 && ny < rows && nx >= 0 && nx < cols) {
-                            neighbors += grid[ny % rows][nx % cols];
-                        }
+                        let ny = (y + dy) % rows;
+                        let nx = (x + dx) % rows;
+                        neighbors += grid[ny % rows][nx % cols];
                     }
                 }
                 if (grid[y][x]) {
@@ -73,7 +71,7 @@
         const y = Math.floor((e.clientY - rect.top) / cellSize);
         if (x >= 0 && x < cols && y >= 0 && y < rows) {
             grid[y][x] = grid[y][x] ? 0 : 1;
-            draw(); // Optional: update immediately
+            draw();
         }
     });
 
