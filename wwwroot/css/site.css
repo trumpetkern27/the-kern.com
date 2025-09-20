@@ -78,7 +78,7 @@ body {
 }
 
 .fun-orange {
-  color: #da800b97;
+  color: #da800b;
 }
 
 .links {
@@ -156,7 +156,7 @@ body {
 .header-bar .page-title {
   font-family: 'Textur', serif;
   font-size: 5.5rem;
-  color: #da800b97;
+  color: #da800b;
   -webkit-text-stroke: 1px rgba(0, 191, 255, 0.5);
   margin: 0;
   text-align: center;
