@@ -252,3 +252,20 @@ body {
   pointer-events: auto; /* keep interactive elements clickable */
 }
 
+@media (max-width: 768px) {
+  .text-center h1 {
+    font-size: 4rem;
+  }
+  .text-center h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-center h1 {
+    font-size: 3rem;
+  }
+  .text-center h2 {
+    font-size: 1rem;
+  }
+}
