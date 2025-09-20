@@ -192,4 +192,5 @@ C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\the
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\the-kern.com.genruntimeconfig.cache
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\ref\the-kern.com.dll
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\i9wlxg8wz8-imo0kga8ki.gz
-C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\w9a93jmsn1-g8819nyxpm.gz
+C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\3y02yhv6f4-ofgmdtcr1c.gz
+C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\w9a93jmsn1-xemuaphg0z.gz

@@ -15,24 +15,33 @@
 </head>
 <body>
     <canvas id="conwayGoL"></canvas>
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/Projects">Projects</a></li>
+                <li><a href="/Privacy">Privacy</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="overlay border-top footer text-muted">
-        <div class="container turqoise-blue">
-            <a asp-area="" asp-page="/Privacy">Privacy</a>
-            <a asp-area="" asp-page="/Index">Home</a>
-        </div>
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/life.js"></script>
     <script src="~/js/accordion.js"></script>
+    <script src="~/js/hamburger.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
