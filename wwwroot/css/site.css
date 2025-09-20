@@ -21,7 +21,7 @@ html {
   top: 0; left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
+  z-index: 0;
   display: block
 }
 
@@ -34,18 +34,43 @@ html {
   font-family: 'UnifrakturMaguntia', cursive, serif;
 }
 
+.times {
+  font-family: "Times New Roman", Times, serif;
+}
+
 .textur {
   font-family: 'Textur', serif;
 }
 
 .textur h1 {
-  font-size: 5.5rem;
-  -webkit-text-stroke: 1px rgba(0, 191, 255, 0.5);
+  font-size: 7.5rem;
+  display: inline-block;
+  padding: 0em 0.5em;
+  border: 2px solid #00ff99;
+  box-shadow: 0 0 10px #00ff99;
+  border-radius: 6px;
+  margin-bottom: 0.5em;
+  background-color: rgba(0,0,0,.7);
+  /*-webkit-text-stroke: 1px rgba(0, 191, 255, 0.5);*/
 }
 
 .textur h2 {
-  font-size: 2rem;
+  font-size: 1.75rem;
+  color: #00ffea;
 }
+
+.textur h2.titlePage {
+  position: relative;
+  display: inline-block;
+  
+  padding: 0.1em 0.1em;
+  border: 2px solid #00ffea;
+  box-shadow: 0 0 10px #00ffea;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,.7);
+}
+
+
 
 body {
   margin-bottom: 60px;
@@ -78,7 +103,7 @@ body {
 }
 
 .fun-orange {
-  color: #da800b;
+  color: #da800b !important;
 }
 
 .links {
@@ -157,10 +182,16 @@ body {
   font-family: 'Textur', serif;
   font-size: 5.5rem;
   color: #da800b;
-  -webkit-text-stroke: 1px rgba(0, 191, 255, 0.5);
   margin: 0;
   text-align: center;
   flex: 1;
+  display: inline-block;
+  padding: 0.1em 0.1em;
+  border: 2px solid #00ffea;
+  box-shadow: 0 0 10px #00ffea;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,.7);
+
 }
 
 .header-bar .home-link {
@@ -172,18 +203,52 @@ body {
 }
 
 .directory {
+  font-size: 1rem;
   text-align: center;
 }
 
 .directory a {
   color: #ff9100;
   text-decoration: none;
+  display: inline-block;
+  padding: 0.25em 0.25em;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 10px #ffffff;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,.7);
+}
+
+.directory a.textur {
+  font-family: "Textur", serif;
 }
 
 .directory a:hover {
-  text-decoration: unerline;
+  background-color: rgba(255,255,255,0.3);
 }
 
 .big-title {
   font-size: 4rem;
 }
+
+.big-border {
+  padding: 2em 2em;
+  border: 2px solid #ac3030;
+  box-shadow: 0 0 10px #ac3030;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,.7);
+}
+
+.text-center, .textur, h1, h2, p {
+  pointer-events: none;
+}
+
+.overlay {
+  position: relative;
+  pointer-events: none; /* pass clicks through */
+  z-index: 1;
+}
+
+.overlay a, .overlay button {
+  pointer-events: auto; /* keep interactive elements clickable */
+}
+

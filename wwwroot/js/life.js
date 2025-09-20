@@ -36,7 +36,7 @@
     function randomize() {
         for (let y = 0; y < rows; y++) {
             for (let x = 0; x < cols; x++) {
-                grid[y][x] = Math.random() > 0.5 ? 1 : 0;
+                grid[y][x] = Math.random() > 0.3 ? 1 : 0;
             }
         }
     }
