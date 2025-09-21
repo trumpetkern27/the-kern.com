@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("the-kern.com")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+77a48e9562ddbc2cf721998824a13a0a1a84fc62")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ecdc44baef4c95cf8dc1f8376edce340914b439")]
 [assembly: System.Reflection.AssemblyProductAttribute("the-kern.com")]
 [assembly: System.Reflection.AssemblyTitleAttribute("the-kern.com")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
