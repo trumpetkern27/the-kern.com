@@ -119,7 +119,6 @@ C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\sco
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\scopedcss\bundle\the-kern.com.styles.css
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\scopedcss\projectbundle\the-kern.com.bundle.scp.css
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\vbit2sgbnk-y632mwuljd.gz
-C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\mfrcnn9q8w-wktzgiuiet.gz
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\gc4yt79gji-xtxxf3hu2r.gz
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\trzudnrf43-t1cqhe9u97.gz
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\pfhlks9rzc-c2jlpeoesf.gz
@@ -193,4 +192,6 @@ C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\the
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\ref\the-kern.com.dll
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\i9wlxg8wz8-imo0kga8ki.gz
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\3y02yhv6f4-ofgmdtcr1c.gz
-C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\w9a93jmsn1-xemuaphg0z.gz
+C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\jusd9jv9t2-upfi2texnx.gz
+C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\w9a93jmsn1-qt25g1ba0d.gz
+C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\mfrcnn9q8w-ji0mdw0ef3.gz

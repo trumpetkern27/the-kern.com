@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("fbeec3cc-7a52-4267-a1ae-c3b0ab01a845")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("the-kern.com")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62b1eec979e51a2ee9b12f884365bbd0a5fe8bc1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6626335867eda4ea7786ebf8b04a57fc6195ec5e")]
 [assembly: System.Reflection.AssemblyProductAttribute("the-kern.com")]
 [assembly: System.Reflection.AssemblyTitleAttribute("the-kern.com")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
