@@ -1,35 +1,24 @@
 @page
 @model the_kern.com.Pages.BlogModel
-@using Markdig
-@using System.IO
 @{
     ViewData["Title"] = "Blog";
-    var postsDir = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/files/post md");
-    var files = System.IO.Directory.GetFiles(postsDir, "*.md");
-
-    int counter = 0; // to give unique IDs
+    int counter = 0;
 }
-
 
 <div class="overlay header-bar">
     <h1 class="page-title">Blog</h1>
 </div>
-<div class="blog-accordion">
-    @foreach (var file in files.OrderByDescending(f => f)) {
-        counter++;
-        var content = System.IO.File.ReadAllText(file);
-        var html = Markdown.ToHtml(content);
 
+<div class="blog-accordion">
+    @foreach (var post in Model.BlogPosts)
+    {
+        counter++;
         var postId = $"accordion-{counter}";
-        var postTitle = System.IO.Path.GetFileNameWithoutExtension(file); // filename = title
         <div class="accordion" id="@postId">
-            <button class="accordion-header">@postTitle</button>
+            <button class="accordion-header">@post.Title</button>
             <div class="overlay accordion-body" id="@($"{postId}-body")">
-                @Html.Raw(html)
+                @Html.Raw(post.HtmlContent)
             </div>
         </div>
     }
-
-
-
 </div>

@@ -171,6 +171,29 @@ body {
   background: #00ffbf;
 }
 
+.blog-accordion .accordion-body em, .blog-accordion .accordion-body a {
+  display: inline;
+  white-space: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.accordion-body table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.blog-accordion .accordion-body table th,
+.accordion-body table td {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+
+
+
 .accordion {
   position: relative;
   z-index: 20;
