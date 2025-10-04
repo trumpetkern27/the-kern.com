@@ -8,4 +8,8 @@
     <UserSecretsId>fbeec3cc-7a52-4267-a1ae-c3b0ab01a845</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="0.42.0" />
+  </ItemGroup>
+
 </Project>

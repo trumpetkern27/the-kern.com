@@ -119,6 +119,58 @@ body {
   align-items: start;
 }
 
+.blog-accordion {
+  display:block;
+  gap: 1rem;
+  margin-top:1rem;
+  align-items:start;
+  overflow-y: auto;
+}
+
+.accordion .blog-accordion {
+  border: 2px solid #00ffbf;
+  box-shadow: 0 0 10px #00ffbf;
+}
+
+.blog-accordion .accordion-body {
+  color: #FFFFFF;
+  background-color: RGBA(0,0,0,0.9);
+  z-index:100;
+  
+}
+
+.blog-accordion .accordion-header {
+  color:#00ffbf;
+}
+
+.blog-accordion .accordion-header.active {
+  background-color: RGBA(0,0,0,0.9);
+}
+
+.blog-accordion .accordion-header.active + .accordion-body {
+  padding: 2rem;
+  max-height: 500px;
+  overflow-y: auto;
+  pointer-events: auto;
+}
+
+.blog-accordion .accordion-header.active + .accordion-body::-webkit-scrollbar{
+  width: 0.5rem;
+}
+
+.blog-accordion .accordion-header.active + .accordion-body::-webkit-scrollbar-track {
+  background: RGBA(0,0,0,0);
+}
+
+.blog-accordion .accordion-header.active + .accordion-body::-webkit-scrollbar-thumb {
+  background: #00FFBFAA;
+  border-radius:3px;
+}
+
+.blog-accordion .accordion-header.active + .accordion-body::-webkit-scrollbar-thumb:hover {
+  background: #00ffbf;
+}
+
 .accordion {
   position: relative;
   z-index: 20;
