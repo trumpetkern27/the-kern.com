@@ -74,7 +74,7 @@ This bug is **not a security issue** (no evidence of UAF or memory corruption), 
 
 ## Videos & Code
 
-I’ve uploaded videos showing the bug in action, as well as the VBA logging scripts I used, to [GitHub](https://github.com/trumpetkern27/Excel-Bug---Oct.-2025).
+I’ve uploaded videos showing the bug in action, as well as the VBA logging scripts I used, to [GitHub](https://github.com/trumpetkern27/Excel-Bug---Oct.-2025) and [YouTube](https://www.youtube.com/watch?v=S68DbOfUNKg&list=PLpMrpYjdyJXbVQiY_3NwlpS4hv4Ahg6JP).
 
 ---
 
