@@ -1,0 +1,72 @@
+@page
+@model the_kern.com.Pages.AutomataModel
+@{
+    ViewData["Title"] = "Automata";
+}
+<div class="overlay">
+    <div class="overlay header-bar">
+        <h1 class="page-title">Automata Visualizer</h1>
+    </div>
+    <style>
+        /* body { font-family: Arial, sans-serif; margin: 20px; } */
+        #automata-canvas { border: 2px solid #fff; cursor: crosshair;}
+        .controls { margin: 20px 0;}
+        .controls button { padding: 10px 20px; margin-right: 10px; font-size: 14px; }
+        .controls button.active { background-color: #4caf50; color: white; }
+        .test-section { margin-top: 20px; }
+        .test-section input { padding: 8px; font-size: 14px; width: 300px }
+    </style>
+
+    <h1>DFA Visualizer</h1>
+
+    <div class="controls">
+        <button id="btn-add-state" class="active" onclick="setMode('add-state')">Add State</button>
+        <button id="btn-add-transition" onclick="setMode('add-transition')">Add Transition</button>
+        <button id="btn-delete" onclick="setMode('delete')">Delete</button>
+        <button onclick="canvas.nodes = []; canvas.edges = []; canvas.draw();">Clear All</button>
+    </div>
+
+    <canvas id="automata-canvas"></canvas>
+    <div class="test-section">
+        <h3>Test String</h3>
+        <input type="text" id="test-input" placeholder="Enter string to test">
+        <button onclick="testString()">Test</button>
+        <button onclick="describeLanguage()">Describe Language</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script src="~/js/automata-canvas.js"></script>
+    <script>
+        function setMode(mode) {
+            canvas.setMode(mode);
+
+            document.querySelectorAll('.controls button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            if (mode === 'add-state') document.getElementById('btn-add-state').classList.add('active');
+            if (mode === 'add-transition') document.getElementById('btn-add-transition').classList.add('active');
+            if (mode === 'delete') document.getElementById('btn-delete').classList.add('active');
+        }
+
+        async function testString() {
+            const input = document.getElementById('test-input').value;
+            await canvas.testString(input);
+        }
+
+        async function describeLanguage() {
+            const dfa = canvas.exportDFA();
+
+            const response = await fetch('/api/automatadescribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ dfa: dfa})
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerHTML = `<h3>Language Description:</h3><p>${result.description}</p>`;
+        }
+    </script>
+
+</div>

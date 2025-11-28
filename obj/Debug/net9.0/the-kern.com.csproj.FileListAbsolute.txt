@@ -197,5 +197,6 @@ C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\com
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\the-kern.com.csproj.AssemblyReference.cache
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\bin\Debug\net9.0\Markdig.dll
 C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\the-kern.78827503.Up2Date
-C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\w9a93jmsn1-5okz4kvumj.gz
-C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\zzqomt9lfj-ko402cobjm.gz
+C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\zzqomt9lfj-y9d0czxmta.gz
+C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\jvu3zafrh7-8lknxbiy9c.gz
+C:\Users\Zach\Documents\personal\projects\code\the-kern.com\obj\Debug\net9.0\compressed\w9a93jmsn1-xewa7am7te.gz

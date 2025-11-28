@@ -1,7 +1,11 @@
+using the_kern.com.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<DFASimulator>();
+builder.Services.AddScoped<DFAAnalyzer>();
+//builder.Services.AddScoped<AutomataService>();
 
 var app = builder.Build();
 
