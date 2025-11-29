@@ -9,8 +9,8 @@ class AutomataCanvas {
         this.startNode = null;
         this.mode = 'add-state';
 
-        this.canvas.width = 800;
-        this.canvas.height = 600;
+        this.canvas.width = this.canvas.parentElement.clientWidth;
+        this.canvas.height = this.canvas.parentElement.clientHeight;
 
         this.setupEventListeners();
         this.draw();
@@ -24,6 +24,7 @@ class AutomataCanvas {
     }
 
     handleMouseDown(e) {
+        this.stopBlinking();
         const pos = this.getMousePos(e);
         const clickedNode = this.getNodeAt(pos.x, pos.y);
 
@@ -42,7 +43,7 @@ class AutomataCanvas {
                 this.selectedNode = null;
             }
         } else if (this.mode === 'delete' && clickedNode) {
-            this.delteNode(clickedNode);
+            this.deleteNode(clickedNode);
         } else if (clickedNode) {
             this.draggingNode = clickedNode;
         }
@@ -147,7 +148,11 @@ class AutomataCanvas {
 
         this.ctx.beginPath();
         this.ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI);
-        this.ctx.fillStyle = node.selected ? '#ccff00' : '#ff0000';
+        if (node.highlight) {
+            this.ctx.fillStyle = node.color;
+        } else {
+            this.ctx.fillStyle = node.selected ? '#ffffff4c' : '#00000000';
+        }
         this.ctx.fill();
         this.ctx.strokeStyle = '#fff';
         this.ctx.lineWidth = 2;
@@ -205,9 +210,53 @@ class AutomataCanvas {
         const endX = to.x - radius * Math.cos(angle);
         const endY = to.y - radius * Math.sin(angle);
 
+
+
+        // jump around label
+        const midX = (startX + endX) / 2
+        const midY = (startY + endY) / 2
+
+        const labelWidth = 30;
+        const labelHeight = 20;
+
+        let breakX, breakY, resumeX, resumeY;
+
+        const theta = Math.atan(labelHeight / labelWidth);
+
+        if (Math.abs(angle) < theta) {
+            breakX  = midX - labelWidth / 2;
+            breakY  = midY - (labelWidth / 2) * Math.tan(angle);
+            resumeX = midX + labelWidth / 2;
+            resumeY = midY + (labelWidth / 2) * Math.tan(angle);
+        } else if (angle >= theta && angle <= Math.PI - theta) {
+            breakX = midX - labelHeight / 2 / Math.tan(angle);
+            breakY = midY - labelHeight / 2;
+            resumeX = midX + labelHeight / 2 / Math.tan(angle);
+            resumeY = midY + labelHeight / 2;
+        } else if (angle <= -theta && angle >= -(Math.PI - theta)) {
+            breakX = midX + labelHeight / 2 / Math.tan(angle);
+            breakY = midY + labelHeight / 2;
+            resumeX = midX - labelHeight / 2 / Math.tan(angle);
+            resumeY = midY - labelHeight / 2;
+        } else if (angle >= Math.PI - theta || angle <= -(Math.PI - theta)) {
+            breakX  = midX + labelWidth / 2;
+            breakY  = midY + (labelWidth / 2) * Math.tan(angle);
+            resumeX = midX - labelWidth / 2;
+            resumeY = midY - (labelWidth / 2) * Math.tan(angle);
+        }
+
+
+
         //draw line
         this.ctx.beginPath();
         this.ctx.moveTo(startX, startY);
+        this.ctx.lineTo(breakX, breakY);
+        this.ctx.strokeStyle = '#fff';
+        this.ctx.lineWidth = 2;
+        this.ctx.stroke();
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(resumeX, resumeY);
         this.ctx.lineTo(endX, endY);
         this.ctx.strokeStyle = '#fff';
         this.ctx.lineWidth = 2;
@@ -229,10 +278,9 @@ class AutomataCanvas {
         this.ctx.stroke();
 
         // draw label
-        const midX = (startX + endX) / 2
-        const midY = (startY + endY) / 2
-        this.ctx.fillStyle = '#00fff0';
-        this.ctx.fillRect(midX - 15, midY - 10, 30, 20);
+        
+        this.ctx.fillStyle = '#fff';
+        this.ctx.strokeRect(midX - labelWidth / 2, midY - labelHeight / 2, labelWidth, labelHeight);
         this.ctx.fillStyle = '#fff';
         this.ctx.font = '14px Arial';
         this.ctx.textAlign = 'center';
@@ -250,11 +298,32 @@ class AutomataCanvas {
         this.ctx.lineWidth = 2;
         this.ctx.stroke();
 
+        //draw arrowhead
+        const headlen = 10;
+        const opening = Math.PI / 6;
+        const bisector = headlen * Math.cos(opening);
+        const theta = Math.acos(bisector / 2 / loopRadius);
+        const tipX = node.x + loopRadius;
+        const tipY = node.y - radius - loopRadius;
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(tipX, tipY);
+        this.ctx.lineTo( 
+            tipX - headlen * Math.cos(opening - theta),
+            tipY + headlen * Math.sin(opening - theta)
+        );
+        this.ctx.moveTo(tipX, tipY);
+        this.ctx.lineTo(
+            tipX - headlen * Math.cos(opening + theta),
+            tipY - headlen * Math.sin(opening + theta)
+        );
+        this.ctx.stroke();
+
         //label
         this.ctx.fillStyle = '#fff';
         this.ctx.font = '14px Arial';
         this.ctx.textAlign = 'center';
-        this.ctx.fillText(symbol, node.x, node.y - radius - loopRadius * 2 - 5);
+        this.ctx.fillText(symbol, node.x, node.y - radius - loopRadius * 2 - 10);
     }
 
     setMode(mode) {
@@ -283,19 +352,69 @@ class AutomataCanvas {
 
     async testString(inputString) {
         const dfa = this.exportDFA();
+        const payload = { dfa: dfa, input: inputString };
 
-        const response = await fetch('/api/automatatest', {
+        const response = await fetch('/Api/AutomataTest', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ dfa: dfa, input: inputString })
+            body: JSON.stringify(payload)
         });
 
-        const result = await response.json();
+        const text = await response.text();
+
+
+        if (!response.ok) {
+            alert('error: ' + text);
+            return;
+        }
+        const result = await JSON.parse(text);
         this.animatePath(result.path, result.accepted);
     }
 
-    animatePath(path, accepted) {
-        alert(`Path: ${path.join(' → ')}\nAccepted: ${accepted}`);
+    async animatePath(path, accepted) {
+        this.stopBlinking();
+        this.nodes.forEach(n => n.highlight = false);
+        this.draw();
+
+        const time = Math.min(5000 / path.length, 500); // 5s total or 0.5s max transition
+
+        for (let i = 0; i < path.length; i++ ) {
+            const node = this.getNodeById(path[i]);
+            if (!node) continue;
+
+            node.highlight = true;
+            node.color = '#ff0000b2';
+            this.draw();
+            node.highlight = false;
+            await new Promise(res => setTimeout(res, time));
+
+        }
+
+        
+        const lastNode = this.getNodeById(path[path.length - 1]);
+        lastNode.color = accepted ? '#10ffbbb2' : '#ff0000b2';
+        this.startBlinking(lastNode);
+        
+    }
+
+    getNodeById(id) {
+        return this.nodes.find(n => n.id === id);
+    }
+
+    startBlinking(node) {
+        if (this.blinkInterval) clearInterval(this.blinkInterval);
+        this.blinkInterval = setInterval(() => {
+            node.highlight = !node.highlight;
+            this.draw();
+        }, 500);
+    }
+
+    stopBlinking() {
+        this.nodes.forEach(n => n.highlight = false);
+        if (this.blinkInterval) {
+            clearInterval(this.blinkInterval);
+            this.blinkInterval = null;
+        }
     }
 
 }

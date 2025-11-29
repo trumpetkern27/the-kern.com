@@ -1,31 +1,43 @@
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace the_kern.com.Models
 {
+    
     public class DFANode
     {
+        [JsonPropertyName("id")]
         public string Id { get; set; }
-        public bool IsStart { get; set; }
-        public bool IsAccept { get; set; }
+        [JsonPropertyName("isStart")]
+        public bool isStart { get; set; }
+        [JsonPropertyName("isAccept")]
+        public bool isAccept { get; set; }
     }
 
     public class DFAEdge
     {
+        [JsonPropertyName("from")]
         public string From { get; set; }
+        [JsonPropertyName("to")]
         public string To { get; set; }
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } 
     }
 
     public class DFA
     {
+        [JsonPropertyName("nodes")]
         public List<DFANode> Nodes { get; set; }
+        [JsonPropertyName("edges")]
         public List<DFAEdge> Edges { get; set; }
 
     }
 
     public class TestStringRequest
     {
+        [JsonPropertyName("dfa")]
         public DFA Dfa { get; set; }
+        [JsonPropertyName("input")]
         public string Input { get; set; }
     }
 
@@ -38,6 +50,7 @@ namespace the_kern.com.Models
 
     public class DescribeLanguageRequest
     {
+        [JsonPropertyName("dfa")]
         public DFA Dfa { get; set; }
     }
 

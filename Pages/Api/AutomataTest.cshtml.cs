@@ -5,6 +5,7 @@ using the_kern.com.Services;
 
 namespace the_kern.com.Pages.Api
 {
+    [IgnoreAntiforgeryToken]
     public class AutomataTestModel : PageModel
     {
         private readonly DFASimulator _simulator;
@@ -23,5 +24,6 @@ namespace the_kern.com.Pages.Api
             var result = _simulator.SimulateString(request.Dfa, request.Input);
             return new JsonResult(result);
         }
+
     }
 }

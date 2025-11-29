@@ -9,15 +9,14 @@
     </div>
     <style>
         /* body { font-family: Arial, sans-serif; margin: 20px; } */
-        #automata-canvas { border: 2px solid #fff; cursor: crosshair;}
+
         .controls { margin: 20px 0;}
-        .controls button { padding: 10px 20px; margin-right: 10px; font-size: 14px; }
-        .controls button.active { background-color: #4caf50; color: white; }
         .test-section { margin-top: 20px; }
-        .test-section input { padding: 8px; font-size: 14px; width: 300px }
+
+
+        .test-section input { /*padding: 8px; font-size: 14px;*/ width: 300px }
     </style>
 
-    <h1>DFA Visualizer</h1>
 
     <div class="controls">
         <button id="btn-add-state" class="active" onclick="setMode('add-state')">Add State</button>
@@ -28,10 +27,9 @@
 
     <canvas id="automata-canvas"></canvas>
     <div class="test-section">
-        <h3>Test String</h3>
         <input type="text" id="test-input" placeholder="Enter string to test">
         <button onclick="testString()">Test</button>
-        <button onclick="describeLanguage()">Describe Language</button>
+        <button onclick="describeLanguage()">Regex</button>
     </div>
 
     <div id="result"></div>
@@ -57,15 +55,28 @@
 
         async function describeLanguage() {
             const dfa = canvas.exportDFA();
+            console.log('dfa being sent:', dfa);
 
-            const response = await fetch('/api/automatadescribe', {
+            const payload = { dfa: dfa};
+            console.log('full payload:', JSON.stringify(payload, null, 2));
+
+
+            const response = await fetch('/Api/AutomataDescribe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ dfa: dfa})
+                body: JSON.stringify({ Dfa: dfa})
             });
 
-            const result = await response.json();
-            document.getElementById('result').innerHTML = `<h3>Language Description:</h3><p>${result.description}</p>`;
+            console.log('response status:', response.status);
+            const text = await response.text();
+            console.log('response body:', text);
+
+            if (!response.ok) {
+                alert('error: ' + text);
+                return;
+            }
+            const result = JSON.parse(text);
+            document.getElementById('result').innerHTML = `<div class="automata-output"><h3>Regex:</h3><p>${result.regex}</p></div>`;
         }
     </script>
 

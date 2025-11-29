@@ -12,7 +12,7 @@ namespace the_kern.com.Services
             var transitions = BuildTransitionTable(dfa);
 
             //find start state
-            var currentState = dfa.Nodes.FirstOrDefault(n => n.IsStart);
+            var currentState = dfa.Nodes.FirstOrDefault(n => n.isStart);
             if (currentState == null)
             {
                 return new TestStringResponse
@@ -45,7 +45,7 @@ namespace the_kern.com.Services
             }
 
             // check if ended in accept state
-            var accepted = currentState.IsAccept;
+            var accepted = currentState.isAccept;
 
             return new TestStringResponse
             {

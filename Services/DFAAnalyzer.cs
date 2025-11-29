@@ -1,6 +1,7 @@
 
 using the_kern.com.Models;
 using System.Text;
+using System.Collections;
 
 namespace the_kern.com.Services
 {
@@ -8,63 +9,180 @@ namespace the_kern.com.Services
     {
         public DescribeLanguageResponse DescribeLanguage(DFA dfa)
         {
-            var description = AnalysePatterns(dfa);
-            var regex = AttemptRegexGeneration(dfa);
+
+            var regex = ConvertDfaToRegex(dfa);
 
             return new DescribeLanguageResponse
             {
-                Description = description,
                 Regex = regex
             };
         }
 
-        private string AnalysePatterns(DFA dfa)
+        
+
+        private string ConvertDfaToRegex(DFA dfa)
         {
-            var patterns = new List<string>();
+            var states = dfa.Nodes.Select(n => n.Id).ToList();
+            string start = dfa.Nodes.First(n => n.isStart).Id;
+            var accepts = dfa.Nodes.Where(n => n.isAccept).Select(n => n.Id).ToList();
 
-            if (HasOnlyOneAcceptedState(dfa, out var acceptState))
+            Console.WriteLine($"States: {string.Join(", ", states)}");
+            Console.WriteLine($"Start: {start}");
+            Console.WriteLine($"Accepts: {string.Join(", ", accepts)}");
+
+            var R = new Dictionary<string, Dictionary<string, string>>();
+
+            foreach (string i in states)
             {
-                if (AllPathsToAccept(dfa, acceptState))
-                {
-                    patterns.Add("All strings are accepted");
-                }
+                R[i] = new Dictionary<string, string>();
+                foreach (string j in states)
+                    R[i][j] = "";
+            }
 
-                var incomingEdges = dfa.Edges.Where(e => e.To == acceptState.Id).ToList();
-                if (incomingEdges.Any())
+            foreach (var e in dfa.Edges)
+            {
+                string from = e.From;
+                string to = e.To;
+                string sym = string.IsNullOrEmpty(e.Symbol) ? "ε" : e.Symbol;
+
+                if (R[from][to] == "")
+                    R[from][to] = sym;
+                else
+                    R[from][to] = Union(R[from][to], sym);
+
+                Console.WriteLine($"Added edge: {from} -> {to} : {sym}");
+            }
+
+            Console.WriteLine("\nInitial R:");
+            PrintRTable(R, states);
+
+            string S = "_S";
+            string F = "_F";
+
+            states.Add(S);
+            states.Add(F);
+
+            R[S] = new Dictionary<string, string>();
+            R[F] = new Dictionary<string, string>();
+
+            foreach (string i in states)
+            {
+                if (!R.ContainsKey(i))
+                    R[i] = new Dictionary<string, string>();
+                foreach (string j in states)
                 {
-                    var symbols = string.Join(", ", incomingEdges.Select(e => $"'{e.Symbol}"));
-                    patterns.Add($"Strings ending with {symbols}");
+                    if (!R[i].ContainsKey(j))
+                        R[i][j] = "";
                 }
             }
 
-            // check alphabet
-            var alphabet = dfa.Edges.Select(e => e.Symbol).Distinct().OrderBy(s => s).ToList();
-            patterns.Add($"Alphabet: {{{string.Join(", ", alphabet)}}}");
+            R[S][start] = "ε";
 
-            // count states
-            patterns.Add($"{dfa.Nodes.Count} states");
+            foreach (var a in accepts)
+                R[a][F] = "ε";
 
-            return string.Join(". ", patterns);
+            Console.WriteLine("\nAfter adding S and F:");
+            PrintRTable(R, states);
+
+            var eliminationList = states.Where(s => s != S && s != F).ToList();
+            Console.WriteLine($"\nElimination order: {string.Join(", ", eliminationList)}");
+
+
+            foreach (var k in eliminationList)
+            {
+                Console.WriteLine($"\n--- Eliminating state {k} ---");
+                string loop = R[k][k];
+                Console.WriteLine($"Loop at {k}: {loop}");
+
+
+                foreach (var i in states.Where(s => s != k))
+                {
+                    if (R[i][k] == "") continue;
+
+                    foreach (var j in states.Where(s => s != k))
+                    {
+                        if (R[k][j] == "") continue;
+
+                        string existing = R[i][j];
+                        string ik = R[i][k];
+                        string kj = R[k][j];
+
+                        string newExp = Concat(ik, Star(loop), kj);
+                        R[i][j] = Union(existing, newExp);
+
+                        Console.WriteLine($"  {i} -> {j}: {existing} ∪ ({ik})({loop})* ({kj}) = {R[i][j]}");
+                    }
+                }
+
+                foreach (string i in states)
+                {
+                    R[i][k] = "";
+                    R[k][i] = "";
+                }
+            }
+
+            Console.WriteLine($"\nfinal regex: {R[S][F]}");
+            return CleanRegex(R[S][F]);
         }
 
-        private string AttemptRegexGeneration(DFA dfa)
+        private void PrintRTable(Dictionary<string, Dictionary<string, string>> R, List<string> states)
         {
-            var alphabet = dfa.Edges.Select(e => e.Symbol).Distinct().OrderBy( s=> s);
-            var alphabetStr = string.Join("|", alphabet);
-
-            return $"({alphabetStr})*";
+            foreach (var i in states)
+            {
+                foreach (var j in states)
+                {
+                    if (R[i][j] != "")
+                        Console.WriteLine($" R[{i}][{j}] = {R[i][j]}");
+                }
+            }
         }
-
-        private bool HasOnlyOneAcceptedState(DFA dfa, out DFANode acceptState)
+        private string Union(string a, string b)
         {
-            var acceptStates = dfa.Nodes.Where( n => n.IsAccept).ToList();
-            acceptState = acceptStates.FirstOrDefault();
-            return acceptStates.Count == 1;
+            if (string.IsNullOrEmpty(a)) return b;
+            if (string.IsNullOrEmpty(b)) return a;
+            if (a == b) return a;
+            return $"({a}|{b})";
         }
 
-        private bool AllPathsToAccept(DFA dfa, DFANode acceptState)
+        private string Concat(string a, string b)
         {
-            return false;
+            if (string.IsNullOrEmpty(a)) return b;
+            if (string.IsNullOrEmpty(b)) return a;
+            if (a == "ε") return b;
+            if (b == "ε") return a;
+            return a + b;
         }
+
+        private string Concat(string a, string b, string c)
+        {
+            return Concat(Concat(a, b), c);
+        }
+
+        private string Star(string a)
+        {
+            if (string.IsNullOrEmpty(a) || a == "ε")
+                return "ε";
+
+            return $"({a})*";
+        }
+
+        private string CleanRegex(string r)
+        {
+            if (string.IsNullOrEmpty(r)) return "";
+
+            /* remove redundant parentheses
+            r = System.Text.RegularExpressions.Regex.Replace(
+                r, @"\(([^|()]+)\)", "$1"
+            );
+
+            /* simplify (a)* -> a*
+            r = System.Text.RegularExpressions.Regex.Replace(
+                r, @"\(([^()|]+?)\)\*", 
+                m => m.Groups[1].Value.Length == 1 ? $"{m.Groups[1].Value}*" : m.Value
+            );
+            */
+            return r;
+        }
+
     }
 }
