@@ -170,6 +170,64 @@ namespace the_kern.com.Services
         {
             if (string.IsNullOrEmpty(r)) return "";
 
+            string prev;
+            do
+            {
+                prev = r;
+                
+                // Pattern: (ε|abc(abc)*) -> (abc)*
+                r = System.Text.RegularExpressions.Regex.Replace(
+                    r, @"\(ε\|([^()]+)\(\1\)\*\)", "($1)*"
+                );
+                
+                // Pattern: (ε|ab(cab)*c) where ab+c = full sequence
+                // This is trickier - need to detect the cycle
+                var match = System.Text.RegularExpressions.Regex.Match(
+                    r, @"\(ε\|([^()]+)\(([^()]+)\)\*([^()]+)\)"
+                );
+                if (match.Success)
+                {
+                    string prefix = match.Groups[1].Value;  // ab
+                    string middle = match.Groups[2].Value;  // cab
+                    string suffix = match.Groups[3].Value;  // c
+                    
+                    // Check if middle starts with suffix + prefix (cab = c + ab)
+                    if (middle == suffix + prefix)
+                    {
+                        string fullCycle = prefix + suffix;  // abc
+                        r = r.Replace(match.Value, $"({fullCycle})*");
+                    }
+                }
+                
+                // Remove ε
+                r = r.Replace("ε", "");
+                
+                // abc(abc)* -> (abc)+
+                r = System.Text.RegularExpressions.Regex.Replace(
+                    r, @"([^()|]+)\(\1\)\*", "($1)+"
+                );
+                
+                // (a)* where a is single char -> a*
+                r = System.Text.RegularExpressions.Regex.Replace(
+                    r, @"\(([^()|])\)\*", "$1*"
+                );
+                
+                // Remove unnecessary parentheses
+                r = System.Text.RegularExpressions.Regex.Replace(
+                    r, @"\(([^()|]+)\)(?![*+?])", "$1"
+                );
+                
+                // Nested parens: ((a)) -> (a)
+                r = System.Text.RegularExpressions.Regex.Replace(
+                    r, @"\(\(([^)]+)\)\)", "($1)"
+                );
+                
+                // (a|a) -> a
+                r = System.Text.RegularExpressions.Regex.Replace(
+                    r, @"\(([^)|]+)\|\1\)", "$1"
+                );
+                
+            } while (r != prev);
             /* remove redundant parentheses
             r = System.Text.RegularExpressions.Regex.Replace(
                 r, @"\(([^|()]+)\)", "$1"
