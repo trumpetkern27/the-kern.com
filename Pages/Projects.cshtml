@@ -1,30 +1,38 @@
 @page
 @model the_kern.com.Pages.ProjectsModel
 @{
-    ViewData["Title"] = "Projects";
+	ViewData["Title"] = "Projects";
 }
 
 <div class="overlay header-bar">
-    <h1 class="page-title">Projects</h1>
+	<h1 class="page-title">Projects</h1>
 </div>
 <div class="projects-grid">
-    <div class="accordion">
-        <button class="accordion-header">LaTeX Renderer for Excel</button>
-        <div class="overlay accordion-body">
-            <p>
-                <a href="~/files/LaTeX_renderer_for_Excel.exe" download>Download Installer</a>
-                <a href="https://github.com/trumpetkern27/LaTeX_renderer_for_Excel" target="_blank">View code on GitHub</a>
-            </p>
-        </div>
-    </div>
-    <div class="accordion">
-        <button class="accordion-header">the-kern.com</button>
-        <div class="overlay accordion-body">
-            <p>
-                <a href="/">This website</a>
-                <a href="https://github.com/trumpetkern27/the-kern.com"
-                target="_blank">View code on GitHub</a>
-            </p>
-        </div>
-    </div>
+	<div class="accordion">
+		<button class="accordion-header">Neovim camel plugin</button>
+		<div class="overlay accordion-body">
+			<p>
+				<a href="https://github.com/trumpetkern27/nvim-camel" target="_blank">View code on GitHub</a>
+			</p>
+		</div>
+	</div>
+	<div class="accordion">
+		<button class="accordion-header">LaTeX Renderer for Excel</button>
+		<div class="overlay accordion-body">
+			<p>
+				<a href="~/files/LaTeX_renderer_for_Excel.exe" download>Download Installer</a>
+				<a href="https://github.com/trumpetkern27/LaTeX_renderer_for_Excel" target="_blank">View code on GitHub</a>
+			</p>
+		</div>
+	</div>
+	<div class="accordion">
+		<button class="accordion-header">the-kern.com</button>
+		<div class="overlay accordion-body">
+			<p>
+				<a href="/">This website</a>
+				<a href="https://github.com/trumpetkern27/the-kern.com"
+				target="_blank">View code on GitHub</a>
+			</p>
+		</div>
+	</div>
 </div>
